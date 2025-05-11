@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Taxa de Câmbio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h1 class="card-title text-primary text-center mb-4">Análise da Taxa de Câmbio US$ - Comercial - Compra - Média</h1>
+                
+                <!-- Página 1: Seleção do Grau do Polinômio -->
+                <div id="Nsr_page1" class="Nsr_page active">
+                    <h2 class="text-primary mb-3">Selecione o Grau do Polinômio</h2>
+                    <p class="mb-4">Escolha o grau do polinômio para a análise da taxa de câmbio:</p>
+                    
+                    <div class="Nsr_option-box card mb-3" data-value="1" onclick="Nsr_selectGrau(this)">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Linear - Grau 1</h3>
+                            <p class="card-text">Polinômio de primeiro grau (reta). Formato: f(ano,mes) = ((ano * a) + (mes * a)) + b</p>
+                        </div>
+                    </div>
+                    
+                    <div class="Nsr_option-box card mb-3" data-value="2" onclick="Nsr_selectGrau(this)">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Não Linear - Grau 2</h3>
+                            <p class="card-text">Polinômio de segundo grau (parábola). Formato: f(ano,mes) = ((a * ano²) + (a * mes²)) + ((a * ano) + (a * mes)) + b</p>
+                        </div>
+                    </div>
+                    
+                    <div class="Nsr_option-box card mb-3" data-value="3" onclick="Nsr_selectGrau(this)">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Não Linear - Grau 3</h3>
+                            <p class="card-text">Polinômio de terceiro grau. Formato: f(ano,mes) = ((a * ano³) + (a * mes³)) + ((a * ano²) + (a * mes²)) + ((a * ano) + (a * mes)) + b</p>
+                        </div>
+                    </div>
+                    
+                    <div class="Nsr_option-box card mb-3" data-value="5" onclick="Nsr_selectGrau(this)">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Não Linear - Grau 5 (Melhor Polinômio)</h3>
+                            <p class="card-text">Polinômio de quinto grau. Oferece melhor ajuste para os dados.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="Nsr_option-box card mb-3" data-value="10" onclick="Nsr_selectGrau(this)">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Não Linear - Grau 10</h3>
+                            <p class="card-text">Polinômio de décimo grau. Maior precisão, mas com risco de overfitting.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-secondary" disabled>Voltar</button>
+                        <button onclick="Nsr_nextPage()" class="btn btn-primary">Próximo <i class="fas fa-arrow-right ms-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Página 2: Visualização da Função e Dados -->
+                <div id="Nsr_page2" class="Nsr_page">
+                    <h2 class="text-primary mb-3">Função do Polinômio</h2>
+                    <div id="Nsr_grauSelecionado" class="alert alert-info"></div>
+                    
+                    <div class="card bg-light mb-4">
+                        <div class="card-body" id="Nsr_formula">
+                            <!-- Fórmula e imagem de variáveis serão inseridas aqui dinamicamente -->
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-primary mb-3">Dados Históricos</h2>
+                    <p>Você pode visualizar ou baixar a planilha completa com os dados históricos:</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Mês/Ano</th>
+                                    <th>Taxa de Câmbio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Nsr_dadosTabela">
+                                <!-- Dados serão inseridos aqui dinamicamente -->
+                                <tr>
+                                    <td>01/1997</td>
+                                    <td>1.0421</td>
+                                </tr>
+                                <tr>
+                                    <td>02/1997</td>
+                                    <td>1.0485</td>
+                                </tr>
+                                <tr>
+                                    <td>03/1997</td>
+                                    <td>1.0559</td>
+                                </tr>
+                                <!-- Mais dados seriam adicionados aqui -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <a 
+                            href="https://iftmedubr-my.sharepoint.com/:x:/g/personal/natalia_salete_estudante_iftm_edu_br/ER42ug4Rd_xDojjAR0RE_rwBnk4kxU3t66ojYReX9haCaQ?e=lK1Qsv" 
+                            id="Nsr_downloadLink" 
+                            class="btn btn-success"
+                            target="_blank"
+                        >
+                            <i class="fas fa-download me-1"></i> Baixar planilha completa (Excel)
+                        </a>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-secondary" onclick="Nsr_previousPage()"><i class="fas fa-arrow-left me-1"></i> Voltar</button>
+                        <button onclick="Nsr_nextPage()" class="btn btn-primary">Próximo <i class="fas fa-arrow-right ms-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Página 3: Cálculo com Base em Mês e Ano -->
+                <div id="Nsr_page3" class="Nsr_page">
+                    <h2 class="text-primary mb-3">Cálculo da Taxa de Câmbio</h2>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="Nsr_mes" min="1" max="12" value="1">
+                                <label for="Nsr_mes">Mês (1-12)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="Nsr_ano" min="2000" max="2030" value="2025">
+                                <label for="Nsr_ano">Ano</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid mb-4">
+                        <button onclick="Nsr_calcularTaxa()" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calculator me-2"></i> Calcular Taxa de Câmbio
+                        </button>
+                    </div>
+                    
+                    <div id="Nsr_resultadoCalculo" class="card border-primary mb-4" style="display: none;">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h5 mb-0">Resultado do Cálculo</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="Nsr_calculoDetalhado" class="mb-3">
+                                <!-- Detalhes do cálculo serão inseridos aqui dinamicamente -->
+                            </div>
+                            <div class="alert alert-success">
+                                <p class="mb-0"><strong>Taxa de Câmbio Estimada: </strong><span id="Nsr_taxaEstimada" class="fw-bold">--</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-secondary" onclick="Nsr_previousPage()"><i class="fas fa-arrow-left me-1"></i> Voltar</button>
+                        <button onclick="Nsr_nextPage()" class="btn btn-primary">Próximo <i class="fas fa-arrow-right ms-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Página 4: Visualização do Gráfico -->
+                <div id="Nsr_page4" class="Nsr_page">
+                    <h2 class="text-primary mb-3">Visualização Gráfica</h2>
+                    <p>Abaixo está o gráfico correspondente ao polinômio de grau <span id="Nsr_grauGrafico" class="fw-bold"></span>:</p>
+                    
+                    <div class="text-center mb-4">
+                        <img id="Nsr_graficoImg" src="placeholder.png" alt="Gráfico do polinômio" class="img-fluid border rounded shadow-sm">
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-secondary" onclick="Nsr_previousPage()"><i class="fas fa-arrow-left me-1"></i> Voltar</button>
+                        <button onclick="Nsr_resetApp()" class="btn btn-primary"><i class="fas fa-home me-1"></i> Início</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white p-3 text-center rounded shadow-sm">
+            <p class="mb-0">Desenvolvido por <strong>Natalia Salete</strong> &copy; <span id="Nsr_currentYear"></span></p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

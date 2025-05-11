@@ -1,0 +1,109 @@
+/* Estilos personalizados para Análise de Taxa de Câmbio */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #0d6efd;
+    font-weight: 700;
+}
+
+h2 {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Estilos para páginas */
+.Nsr_page {
+    display: none;
+}
+
+.Nsr_page.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilos para as caixas de opção */
+.Nsr_option-box {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.Nsr_option-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #0d6efd;
+}
+
+.Nsr_option-box.selected {
+    border-left: 4px solid #0d6efd;
+    background-color: #e9f0fd;
+}
+
+/* Estilos para a fórmula */
+.Nsr_formula-text {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+}
+
+.Nsr_variaveis-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.Nsr_variaveis-img {
+    max-width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Estilo para imagens gráficas */
+#Nsr_graficoImg {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+#Nsr_graficoImg:hover {
+    transform: scale(1.02);
+}
+
+/* Animações e efeitos */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para resultado do cálculo */
+#Nsr_resultadoCalculo {
+    transition: all 0.3s ease;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    color: #6c757d;
+}
