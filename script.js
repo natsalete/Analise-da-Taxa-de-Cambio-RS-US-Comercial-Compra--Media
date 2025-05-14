@@ -167,7 +167,7 @@ function Nsr_calcularTaxa() {
         return;
     }
     
-    if (isNaN(ano) || ano < 2000 || ano > 2030) {
+    if (isNaN(ano)) {
         Nsr_showAlert("Por favor, insira um ano válido entre 2000 e 2030.", "danger");
         return;
     }
@@ -262,7 +262,7 @@ function Nsr_calcularTaxa() {
             const termo7 = 0.0154621223043723 * Math.pow(ano, 4);
             const termo8 = -0.00039948274156242 * Math.pow(mes, 4);
             const termo9 = -1.55157961018713e-06 * Math.pow(ano, 5);
-            const termo10 = 7.72825982521101E-06 * Math.pow(mes, 5);
+            const termo10 = 7.72825982521101e-06 * Math.pow(mes, 5);
             const termo11 = 48751082900.5348;
             
             taxaEstimada = termo1 + termo2 + termo3 + termo4 + termo5 + termo6 + termo7 + 
