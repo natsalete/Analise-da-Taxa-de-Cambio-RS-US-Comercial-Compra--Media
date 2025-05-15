@@ -99,7 +99,7 @@ Os dados históricos utilizados neste projeto foram obtidos através de fontes o
 
 ## 👩‍💻 Autoria
 
-Desenvolvido por **Natalia Salete** - [GitHub](https://github.com/seu-usuario)
+Desenvolvido por **Natalia Salete** - [GitHub](https://github.com/natsalete)
 
 ## 📄 Licença
 
